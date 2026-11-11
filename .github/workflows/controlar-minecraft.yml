@@ -1,0 +1,63 @@
+name: 🎮 Controlar Rafael Host
+
+on:
+  workflow_dispatch:
+    inputs:
+      comando:
+        description: "O que fazer com o servidor Minecraft?"
+        required: true
+        type: choice
+        options:
+          - iniciar
+          - reiniciar
+          - status
+          - parar
+
+permissions:
+  contents: read
+
+jobs:
+  controle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verificar configuracao de acesso
+        env:
+          HOST: ${{ secrets.RAFAEL_SSH_HOST }}
+          USER: ${{ secrets.RAFAEL_SSH_USER }}
+          KEY: ${{ secrets.RAFAEL_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.RAFAEL_SSH_KNOWN_HOSTS }}
+        run: |
+          for name in HOST USER KEY KNOWN_HOSTS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Falta configurar um dos quatro segredos SSH da maquina na nuvem."
+              exit 1
+            fi
+          done
+
+      - name: Conectar ao computador na nuvem
+        env:
+          HOST: ${{ secrets.RAFAEL_SSH_HOST }}
+          USER: ${{ secrets.RAFAEL_SSH_USER }}
+          KEY: ${{ secrets.RAFAEL_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.RAFAEL_SSH_KNOWN_HOSTS }}
+          COMMAND: ${{ inputs.comando }}
+        run: |
+          set -euo pipefail
+          mkdir -m 700 -p ~/.ssh
+          printf '%s\n' "$KEY" > ~/.ssh/id_rafael
+          chmod 600 ~/.ssh/id_rafael
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+          case "$COMMAND" in
+            iniciar) REMOTE_COMMAND="iniciar" ;;
+            reiniciar) REMOTE_COMMAND="reiniciar" ;;
+            status) REMOTE_COMMAND="status" ;;
+            parar) REMOTE_COMMAND="parar" ;;
+            *) echo "::error::Comando invalido"; exit 1 ;;
+          esac
+          # A chave do host deve ser verificada antes, fora do GitHub Actions.
+          ssh -i ~/.ssh/id_rafael -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=15 \
+            "${USER}@${HOST}" \
+            "cd ~/Server && sudo -n bash deploy/admin.sh $REMOTE_COMMAND"
