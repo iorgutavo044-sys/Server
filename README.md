@@ -66,13 +66,12 @@ Na primeira vez, o Docker baixa a imagem Paper e os plugins Geyser e Floodgate. 
 
 Se o script relatar problema no Geyser, confira os logs e a versão instalada: projetos atualizam seu formato de configuração. O script tenta habilitar Floodgate e a conexão Bedrock por NetherNet.
 
-## PASSO 5 — Liberar acesso dos jogadores
+## PASSO 5 — Servidor público: qualquer jogador pode entrar
 
-A whitelist está ligada por segurança. No Ubuntu:
+A whitelist do Minecraft está DESLIGADA por padrão: o servidor é público para qualquer jogador Java original ou Bedrock via Geyser/Floodgate. A autenticação Java permanece ligada. Para conceder administração ao seu amigo (não compartilhe sua senha do painel), use no Ubuntu:
 
 ```bash
-sudo bash deploy/admin.sh java SEU_NOME_JAVA
-sudo bash deploy/admin.sh bedrock GAMERTAG_BEDROCK
+sudo bash deploy/admin.sh op NOME_JAVA_DO_SEU_AMIGO
 sudo bash deploy/admin.sh jogadores
 ```
 
@@ -133,3 +132,7 @@ O GitHub Pages mostrará o endereço e consultará o status Java por um serviço
 - [Oracle Always Free](https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm)
 
 Projeto independente, não afiliado à Mojang Studios ou Microsoft. Tenha a ajuda de um responsável para contas, segurança e cobrança.
+
+## Acesso público e administração
+
+O Minecraft está configurado para aceitar jogadores em geral (`ENABLE_WHITELIST=FALSE`, `ENFORCE_WHITELIST=FALSE`). **O painel Portainer continua privado**, via túnel SSH; não compartilhe senha SSH, chave privada, senha do painel ou token. O comando `op NOME` concede poderes amplos no jogo: só faça isso depois de conhecer e confiar na pessoa. Para revogar, rode `sudo bash deploy/admin.sh console "deop NOME"`. Plugins de permissões como LuckPerms podem dar funções limitadas a moderadores. Se a máquina já estiver executando uma configuração anterior, faça backup e recrie os contêineres com `cd minecraft && sudo docker compose up -d --force-recreate minecraft` para aplicar a whitelist desativada. Minigames ainda precisam ser configurados.
