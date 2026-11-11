@@ -18,9 +18,9 @@ services:
       MEMORY: "${MC_MEMORY:-6G}"
       MAX_PLAYERS: "${MAX_PLAYERS:-20}"
       ONLINE_MODE: "TRUE"
-      ENABLE_WHITELIST: "TRUE"
-      ENFORCE_WHITELIST: "TRUE"
-      MOTD: "Rafael Host - Java e Bedrock"
+      ENABLE_WHITELIST: "FALSE"
+      ENFORCE_WHITELIST: "FALSE"
+      MOTD: "Rafael Host - Publico Java e Bedrock"
       TZ: America/Sao_Paulo
       PLUGINS: |
         https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
