@@ -11,8 +11,8 @@
 Este repositório se chama **Server**, na conta **iorgutavo044-sys**.
 
 1. Abra **Settings → Pages** no repositório.
-2. Em **Build and deployment**, escolha **Deploy from a branch**.
-3. Selecione **main** e pasta **/docs**, depois **Save**.
+2. Em **Build and deployment**, em **Source**, selecione **GitHub Actions** e salve.
+3. O arquivo `.github/workflows/publicar-site.yml` já está no repositório e foi preparado para publicar automaticamente a pasta `/docs` depois dessa ativação.
 4. O endereço esperado será **https://iorgutavo044-sys.github.io/Server/** se o GitHub Pages estiver habilitado e a implantação for concluída.
 
 O site ficará no ar, porém mostrará **IP ainda não configurado** até que você crie a máquina Minecraft real. Quando tiver o IP, edite `docs/config.js`, altere `host` e faça commit.
