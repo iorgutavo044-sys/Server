@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1610"><meta name="description" content="Rafael Host, servidor Minecraft Java e Bedrock">
+<title>RAFAEL HOST — Seu mundo, sua aventura</title>
+<style>
+:root{font-family:Inter,system-ui,Arial,sans-serif;color-scheme:dark;--bg:#09140e;--fg:#f2fff1;--muted:#a8beab;--accent:#aaff6e;--panel:#11251a;--stroke:#345540}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--fg);background:var(--bg);line-height:1.6}
+body:before{content:"";position:absolute;inset:0 0 auto;height:630px;pointer-events:none;z-index:-1;background:radial-gradient(circle at 80% 10%,#317c4a80,transparent 44%),radial-gradient(circle at 10% 53%,#1a513e55,transparent 42%)}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #5cfcce;outline-offset:3px}
+.wrap{max-width:1100px;margin:auto;padding:0 24px}header{position:sticky;top:0;z-index:10;background:#0b1812e9;border-bottom:1px solid #31543c;backdrop-filter:blur(12px)}
+nav{display:flex;justify-content:space-between;align-items:center;min-height:75px;gap:12px}
+.logo{font-size:24px;font-weight:1000;letter-spacing:-.7px}.logo span{color:var(--accent)}.navlinks{display:flex;gap:24px;font-size:14px;color:#c3d8c5;font-weight:750}
+.hero{min-height:540px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:35px;padding-top:65px;padding-bottom:70px}
+.eyebrow{font-size:11px;letter-spacing:2px;color:#c9f8cb;border:1px solid #44764c;padding:9px 13px;border-radius:30px;font-weight:900}
+h1{font-size:clamp(45px,6vw,74px);line-height:1.04;letter-spacing:-.065em;margin:27px 0 23px}h1 em{font-style:normal;color:var(--accent)}
+.lead{color:#c0d1be;font-size:17px;line-height:1.8} .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{border-radius:11px;padding:12px 20px;font-weight:900;display:inline-block;border:1px solid #416947}
+.primary{color:#0c210e;background:var(--accent);border-color:var(--accent)}.ghost{background:#1c3827;color:#f0fff0}
+.art{min-height:330px;border:1px solid #538263;border-radius:24px;background:linear-gradient(130deg,#234a2b,#0e1c17);box-shadow:0 30px 85px #0009;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.art-title{letter-spacing:1.5px;font-size:12px;font-weight:900;color:#bceac1}.art-world{text-align:center;font-size:104px;text-shadow:0 20px 30px #0009}
+.art-card{background:#11281a;border-radius:12px;border:1px solid #447250;padding:14px;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+section{padding:45px 0 85px}.heading{text-align:center;max-width:610px;margin:0 auto 31px}.heading small{color:var(--accent);letter-spacing:2px;font-size:11px;font-weight:900}.heading h2{font-size:clamp(28px,4vw,43px);letter-spacing:-.04em;line-height:1.13;margin:10px 0}.heading p{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{background:linear-gradient(140deg,#152c1e,#0e1d15);border:1px solid var(--stroke);padding:26px;border-radius:18px}.card h3{font-size:23px;margin:0}.card p{color:var(--muted);margin:4px 0}
+.addr{background:#08170e;border:1px solid #426b48;border-radius:12px;margin:20px 0;padding:14px;font:700 14px ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
+.copy{background:var(--accent);color:#0b200d;border:0;padding:12px;border-radius:11px;font-weight:950;width:100%}.copy:disabled{opacity:.5;cursor:not-allowed}
+.status{display:flex;gap:12px;align-items:center;margin-top:20px;background:#173222;padding:17px;border-radius:14px;border:1px solid #375b3f}.status .light{width:12px;height:12px;border-radius:50%;background:#b5bcb5;flex-shrink:0}
+.status.online .light{background:var(--accent);box-shadow:0 0 15px var(--accent)}.status.offline .light{background:#ff938d}
+.status strong{display:block}.status small{display:block;color:var(--muted)}
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.games article{background:#12271b;border:1px solid var(--stroke);border-radius:18px;padding:25px}.games h3{margin:10px 0 6px}.games p{color:var(--muted)}.tag{color:var(--accent);font-size:11px;font-weight:900;border:1px solid #4a7951;padding:5px 10px;border-radius:30px;display:inline-block}
+.note{background:#142b1d;border:1px solid #3f6345;border-radius:15px;padding:20px;color:#cadfcc;margin-top:22px}
+footer{padding:30px 0;color:#9eb69e;border-top:1px solid #2c4735;font-size:13px}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:50px;gap:20px}.art{min-height:280px}.games{grid-template-columns:1fr}.navlinks{gap:10px}.cards{grid-template-columns:1fr}}
+@media(max-width:370px){.navlinks a:last-child{display:none}.logo{font-size:19px}}
+</style><script src="config.js" defer></script></head><body>
+<header><nav class="wrap"><a href="#inicio" class="logo">⚒ RAFAEL <span>HOST</span></a><div class="navlinks"><a href="#jogar">Jogar</a><a href="#minigames">Minigames</a><a href="#admin">Admin</a></div></nav></header>
+<main>
+<div class="wrap hero" id="inicio"><div><span class="eyebrow">⛏ REDE MINECRAFT JAVA + BEDROCK</span><h1>Seu mundo.<br><em>Sua aventura.</em></h1><p class="lead">A Rafael Host é o começo de uma rede de Minecraft para construir, explorar e jogar com amigos. Prepare sua espada e venha descobrir!</p><div class="buttons"><a href="#jogar" class="btn primary">🎮 Entrar no servidor</a><a href="#minigames" class="btn ghost">⚔️ Minigames</a></div><p style="color:#a4bdab;font-size:13px;margin-top:28px">🛡️ Login Java original e Bedrock via Floodgate. Rede independente.</p></div><div class="art"><div class="art-title">● RAFAEL GAMES NETWORK</div><div class="art-world" aria-hidden="true">🏰⛏️</div><div class="art-card"><strong>Nova aventura te esperando</strong><span style="color:#aaff6e;font-weight:900">JAVA + BEDROCK</span></div></div></div>
+<section id="jogar"><div class="wrap"><div class="heading"><small>COMECE SUA AVENTURA</small><h2>Como entrar no servidor?</h2><p>Copie o endereço quando a máquina Minecraft estiver configurada. O site sozinho não hospeda o jogo.</p></div><div class="cards">
+<article class="card"><h3>💻 Minecraft Java</h3><p>Computador — edição Java original</p><div id="javaIp" class="addr">IP ainda não configurado</div><button class="copy" id="javaCopy" disabled>Copiar IP Java</button></article>
+<article class="card"><h3>📱 Minecraft Bedrock</h3><p>Celular, Windows e consoles compatíveis</p><div class="addr"><span id="bedrockIp">IP ainda não configurado</span><br><small id="bedrockPort">Porta: —</small></div><button class="copy" id="bedrockCopy" disabled>Copiar IP Bedrock</button></article></div>
+<div class="status" id="statusBox" role="status"><span class="light"></span><div><strong id="statusText">Aguardando configuração</strong><small id="statusDetail">A máquina Minecraft ainda precisa de um IP real em docs/config.js.</small></div></div>
+<div class="note">ℹ️ Status consultado por um serviço externo e sujeito a atraso. A página fica no GitHub Pages, enquanto o servidor real precisa rodar numa máquina separada, como uma VPS na nuvem.</div></div></section>
+<section id="minigames"><div class="wrap"><div class="heading"><small>EM CONSTRUÇÃO</small><h2>Futuros minigames</h2><p>As ideias abaixo ainda não estão instaladas. Primeiro vamos configurar e testar o Minecraft.</p></div><div class="games"><article><div style="font-size:42px">🛏️</div><h3>BedWars</h3><p>Proteja sua cama e conquiste as ilhas!</p><span class="tag">PLANEJADO</span></article><article><div style="font-size:42px">⚔️</div><h3>SkyWars</h3><p>Batalhas nas alturas com seus amigos.</p><span class="tag">PLANEJADO</span></article><article><div style="font-size:42px">🏃</div><h3>Parkour</h3><p>Corra, pule e vença os obstáculos.</p><span class="tag">PLANEJADO</span></article></div></div></section>
+<section id="admin"><div class="wrap"><div class="heading"><small>ÁREA ADMINISTRATIVA</small><h2>Um painel de verdade</h2><p>O Portainer permite iniciar e parar o Minecraft, ver logs e gerenciar contêineres. Por segurança, ele fica privado, separado deste site.</p></div><div class="note">🔐 Leia <strong>README.md</strong> no repositório do GitHub para configurar o servidor e acessar o painel por túnel SSH. Nunca publique suas senhas e chaves no GitHub.</div></div></section></main>
+<footer><div class="wrap">© <span id="year"></span> Rafael Host. Projeto independente, não afiliado à Mojang Studios ou Microsoft.</div></footer>
+<script>
+(() => {
+document.getElementById('year').textContent=new Date().getFullYear();
+const c=window.RAFAEL_CONFIG||{},h=String(c.host||'').trim();
+if(!h || !/^[a-z0-9.-]+$/i.test(h) || /COLOQUE|AQUI|EXEMPLO/i.test(h)) return;
+const j=h+':'+(Number(c.javaPort)||25565),p=Number(c.bedrockPort)||19132;
+document.getElementById('javaIp').textContent=j;document.getElementById('bedrockIp').textContent=h;document.getElementById('bedrockPort').textContent='Porta: '+p;
+[['javaCopy',j],['bedrockCopy',h]].forEach(([id,value])=>{const b=document.getElementById(id);b.disabled=false;b.onclick=async()=>{try{await navigator.clipboard.writeText(value);b.textContent='Copiado!'}catch{b.textContent='Copie: '+value}setTimeout(()=>b.textContent=id==='javaCopy'?'Copiar IP Java':'Copiar IP Bedrock',2200)}});
+async function check(){
+const box=document.getElementById('statusBox'),t=document.getElementById('statusText'),d=document.getElementById('statusDetail');
+box.className='status';t.textContent='Consultando servidor...';
+try{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8500);let r;try{r=await fetch('https://api.mcstatus.io/v2/status/java/'+encodeURIComponent(j),{signal:controller.signal,cache:'no-store'})}finally{clearTimeout(timer)}
+if(!r.ok)throw Error('Serviço indisponível');const data=await r.json();if(data.online){box.classList.add('online');t.textContent='🟢 Minecraft online';d.textContent=(data.players?.online??'?')+' jogadores online'}else{box.classList.add('offline');t.textContent='🔴 Minecraft offline';d.textContent='Verifique a máquina e a porta 25565/TCP'}}
+catch(e){t.textContent='⚠️ Status não disponível';d.textContent='Não foi possível consultar o status agora.'}}
+check();setInterval(check,300000);
+})();
+</script>
+</body></html>
