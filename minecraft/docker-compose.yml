@@ -37,3 +37,21 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./portainer-data:/data
+
+  # Playit opcional: apenas para quando Minecraft estiver num computador na nuvem.
+  # Execute com --profile playit depois de criar o arquivo minecraft/playit-secret.
+  playit:
+    image: ghcr.io/playit-cloud/playit-agent:latest
+    container_name: rafael-playit
+    profiles:
+      - playit
+    restart: always
+    network_mode: host
+    environment:
+      SECRET_KEY_FILE: /run/secrets/playit
+    volumes:
+      - ./playit-secret:/run/secrets/playit:ro
+      - playit-data:/var/lib/playit
+
+volumes:
+  playit-data:
