@@ -1,0 +1,11 @@
+# Segredos, mundos e backups jamais devem ir para o repositório público.
+minecraft/.env
+minecraft/data/
+minecraft/portainer-data/
+backups/
+*.pem
+*.key
+*.ppk
+id_rsa
+id_ed25519
+*.zip
