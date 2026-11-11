@@ -1,21 +1,16 @@
 # 🟩 RAFAEL HOST — Minecraft Java + Bedrock de verdade
 
-**Este repositório tem duas partes separadas:**
-- `docs/`: site público e gratuito para o **GitHub Pages**.
-- `minecraft/` e `deploy/`: **servidor real Minecraft Paper** numa máquina **Ubuntu na nuvem**, com Geyser/Floodgate para Bedrock e painel Portainer privado.
+**Projeto para um Minecraft público e painel de administração privado:**
+- `minecraft/` e `deploy/`: **servidor Minecraft Paper** numa máquina **Ubuntu na nuvem**, com Geyser/Floodgate para Bedrock e painel Portainer privado.
+- `docs/`: site opcional **não publicado**; GitHub Pages não é necessário.
 
 **Importante:** GitHub Pages não hospeda o jogo. É necessário ter uma máquina na nuvem (ex.: Oracle Cloud Always Free, se disponível). Essa modalidade pode ficar sem capacidade, e não garante uptime ou instância permanente. O Minecraft não foi ligado automaticamente apenas porque os arquivos foram publicados aqui.
 
-## PASSO 1 — Publicar o site
+## O site não precisa ficar público
 
-Este repositório se chama **Server**, na conta **iorgutavo044-sys**.
+A **Rafael Host** será uma rede de Minecraft **aberta a todos os jogadores**, mas o painel de administração será **privado**, acessível por túnel SSH. Você não precisa configurar GitHub Pages. A publicação automática do site foi desativada; os arquivos de `docs/` são apenas um modelo opcional, sem necessidade de publicação.
 
-1. Abra **Settings → Pages** no repositório.
-2. Em **Build and deployment**, em **Source**, selecione **GitHub Actions** e salve.
-3. O arquivo `.github/workflows/publicar-site.yml` já está no repositório e foi preparado para publicar automaticamente a pasta `/docs` depois dessa ativação.
-4. O endereço esperado será **https://iorgutavo044-sys.github.io/Server/** se o GitHub Pages estiver habilitado e a implantação for concluída.
-
-O site ficará no ar, porém mostrará **IP ainda não configurado** até que você crie a máquina Minecraft real. Quando tiver o IP, edite `docs/config.js`, altere `host` e faça commit.
+O **GitHub guarda o código**, não executa o Minecraft. Para funcionar 24 horas sem ligar o PC, precisamos de uma máquina externa. Ainda não há uma instância na nuvem conectada ou servidor Minecraft comprovadamente online.
 
 ## PASSO 2 — Criar a máquina para o jogo (com ajuda de responsável)
 
@@ -107,15 +102,11 @@ sudo bash deploy/admin.sh iniciar
 
 Os backups locais ficam em `backups/`, que **não deve ser enviado ao GitHub**. Guarde cópias criptografadas fora da máquina para não perder o mundo. Os backups podem conter chaves e dados privados do servidor.
 
-## PASSO 7 — Colocar o IP real no site
+## PASSO 7 — Convidar jogadores
 
-Depois de conseguir entrar no Minecraft, edite [docs/config.js](docs/config.js) no GitHub:
+Compartilhe apenas o IP público do Minecraft (Java: porta 25565; Bedrock: porta 19132), **nunca** credenciais de SSH ou do painel.
 
-```js
-host: "IP_PUBLICO_DA_SUA_MAQUINA",
-```
-
-O GitHub Pages mostrará o endereço e consultará o status Java por um serviço externo. Esse status pode demorar, falhar ou não refletir imediatamente o estado real.
+Para dar poderes de operador ao amigo que ajuda no servidor, use `sudo bash deploy/admin.sh op NOME_JAVA`; para remover, `sudo bash deploy/admin.sh console "deop NOME_JAVA"`. O acesso de administrador total é poderoso: considere um plugin de permissões para dar somente os comandos necessários. Não deixe todos os jogadores com OP.
 
 ## Minigames
 
