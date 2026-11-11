@@ -127,3 +127,21 @@ Projeto independente, não afiliado à Mojang Studios ou Microsoft. Tenha a ajud
 ## Acesso público e administração
 
 O Minecraft está configurado para aceitar jogadores em geral (`ENABLE_WHITELIST=FALSE`, `ENFORCE_WHITELIST=FALSE`). **O painel Portainer continua privado**, via túnel SSH; não compartilhe senha SSH, chave privada, senha do painel ou token. O comando `op NOME` concede poderes amplos no jogo: só faça isso depois de conhecer e confiar na pessoa. Para revogar, rode `sudo bash deploy/admin.sh console "deop NOME"`. Plugins de permissões como LuckPerms podem dar funções limitadas a moderadores. Se a máquina já estiver executando uma configuração anterior, faça backup e recrie os contêineres com `cd minecraft && sudo docker compose up -d --force-recreate minecraft` para aplicar a whitelist desativada. Minigames ainda precisam ser configurados.
+
+## Controlar Minecraft pelo GitHub (botões)
+
+O arquivo [`.github/workflows/controlar-minecraft.yml`](.github/workflows/controlar-minecraft.yml) adiciona em **Actions → Controlar Rafael Host → Run workflow** as opções **iniciar**, **reiniciar**, **status** e **parar**.
+
+**Isso NÃO executa Minecraft nos servidores do GitHub.** Cada botão abre uma conexão SSH para **sua própria máquina Linux** já criada e preparada com `deploy/instalar-ubuntu.sh` e `deploy/ligar.sh`. Nenhum botão funcionará antes de existir a máquina.
+
+O proprietário responsável pela conta deve configurar, em **Settings → Secrets and variables → Actions**, estes **segredos de repositório** (nunca adicionar no código):
+- `RAFAEL_SSH_HOST`: IP ou DNS da máquina.
+- `RAFAEL_SSH_USER`: usuário Linux, normalmente `ubuntu`.
+- `RAFAEL_SSH_PRIVATE_KEY`: chave SSH privada dedicada para essa automação.
+- `RAFAEL_SSH_KNOWN_HOSTS`: linha de host-key SSH validada por impressão digital previamente conferida com a máquina real. **Não copie uma chave não verificada.**
+
+É necessário preparar autenticação SSH por chave, acesso SSH de rede e capacidade de executar `sudo -n bash deploy/admin.sh` nessa máquina. **Não desative checagem da chave do host e não abra Portainer/RCON na internet.** Uma chave específica com privilégios limitados é preferível à chave pessoal de administração. O workflow executa somente comandos predefinidos, sem aceitar comandos livres.
+
+Em `minecraft/docker-compose.yml`, `restart: always` faz o contêiner do Minecraft **reiniciar se encerrar inesperadamente** e voltar após o Docker reiniciar. **Não mantém o servidor vivo se a VPS for desligada, perdida ou recolhida pelo provedor.** Para aplicar essa alteração numa instalação anterior, no Ubuntu execute: `cd ~/Server && git pull --ff-only && cd minecraft && sudo docker compose up -d --force-recreate minecraft`.
+
+**Atenção:** o código está no GitHub, mas nenhuma VPS real ou chave foi configurada por esta automação; não é possível garantir 24 horas grátis apenas pelo GitHub.
