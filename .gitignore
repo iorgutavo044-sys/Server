@@ -9,3 +9,6 @@ backups/
 id_rsa
 id_ed25519
 *.zip
+
+# Chave privada de agente Playit
+minecraft/playit-secret
