@@ -145,3 +145,31 @@ O proprietário responsável pela conta deve configurar, em **Settings → Secre
 Em `minecraft/docker-compose.yml`, `restart: always` faz o contêiner do Minecraft **reiniciar se encerrar inesperadamente** e voltar após o Docker reiniciar. **Não mantém o servidor vivo se a VPS for desligada, perdida ou recolhida pelo provedor.** Para aplicar essa alteração numa instalação anterior, no Ubuntu execute: `cd ~/Server && git pull --ff-only && cd minecraft && sudo docker compose up -d --force-recreate minecraft`.
 
 **Atenção:** o código está no GitHub, mas nenhuma VPS real ou chave foi configurada por esta automação; não é possível garantir 24 horas grátis apenas pelo GitHub.
+
+## Playit.gg + computador na nuvem (opcional)
+
+O Playit **não executa o Minecraft** e não mantém uma VPS desligada ligada. Ele oferece endereços de conexão para os jogadores e dispensa abrir portas públicas para o jogo. A opção Playit já foi adicionada ao `minecraft/docker-compose.yml` como perfil opcional.
+
+Depois de instalar a Rafael Host numa **máquina Ubuntu ligada na nuvem** e iniciar o Minecraft, crie sua conta Playit em [playit.gg](https://playit.gg/) e gere uma chave de agente em [Playit para Docker](https://playit.gg/account/setup/wizard/new-account/docker/docker-name). **Nunca compartilhe a chave e nunca publique no GitHub.**
+
+No terminal SSH da máquina Ubuntu, a partir do diretório `~/Server`:
+
+```bash
+cd ~/Server
+umask 077
+nano minecraft/playit-secret
+```
+
+Cole **apenas** a chave secreta do agente no arquivo, salve, e então execute:
+
+```bash
+cd ~/Server/minecraft
+sudo docker compose --profile playit up -d
+sudo docker logs --tail=80 rafael-playit
+```
+
+No painel do Playit, crie os túneis necessários: **Minecraft Java** com destino `127.0.0.1:25565`, e, se for usar Bedrock, o protocolo **Bedrock NetherNet** com destino `127.0.0.1:19132`. Escolha o tipo de túnel apropriado que o painel oferecer; o protocolo Bedrock pode ter exigências diferentes de RakNet tradicional. **Geyser/Floodgate também devem estar funcionando no servidor.** Compartilhe com os jogadores os endereços gerados pelo Playit (não as chaves).
+
+O Playit usa rede do host nesse Compose. As portas do Minecraft já estão mapeadas no host local. Não é necessário expor o painel Portainer na internet. Para desligar o Playit sem desligar o Minecraft, execute `sudo docker stop rafael-playit` (com a política `restart: always`, ele poderá voltar ao reiniciar Docker; para removê-lo do Compose, use o perfil e `docker compose --profile playit stop playit`).
+
+**Importante:** se a máquina na nuvem ficar desligada, suspensa ou for recuperada pelo provedor gratuito, Playit e Minecraft ficarão offline. O GitHub não substitui o computador na nuvem.
