@@ -1,0 +1,26 @@
+# Rafael Host - modo leve para VPS Ubuntu com ~2 GB de RAM.
+# Nao inclui painel Portainer para economizar memoria.
+# A EULA deve ser aceita conscientemente no arquivo .env local.
+services:
+  minecraft:
+    image: itzg/minecraft-server:java25
+    container_name: rafael-java-leve
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - "25565:25565/tcp"
+    environment:
+      EULA: "${EULA:-FALSE}"
+      TYPE: PAPER
+      VERSION: LATEST
+      MEMORY: "1200M"
+      MAX_PLAYERS: "8"
+      VIEW_DISTANCE: "5"
+      SIMULATION_DISTANCE: "4"
+      ONLINE_MODE: "TRUE"
+      ENABLE_WHITELIST: "FALSE"
+      ENFORCE_WHITELIST: "FALSE"
+      MOTD: "Rafael Games Network - Java"
+    volumes:
+      - ./data:/data
